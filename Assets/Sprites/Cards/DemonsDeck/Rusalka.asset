@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 653cdf2b8226bdb46ab6d2d3110e576f, type: 3}
+  m_Name: Rusalka
+  m_EditorClassIdentifier: 
+  cardName: Rusallka
+  cardImage: {fileID: 21300000, guid: d3432a51104dd0540bbf452e2d39c320, type: 3}
+  iconCardType: {fileID: 21300000, guid: edc2a67db029188418dd259bbae19998, type: 3}
+  hp: 6
+  manaCost: 3
+  dmg: 1
+  cardDescription: "Przy u\u017Cyciu wnosi omen \u015Bmierci na plansze. Omen \u015Bmierci:
+    za ka\u017Cd\u0105 \u015Bmier\u0107 dostaje +2 DMG"
+  cardType: 2
