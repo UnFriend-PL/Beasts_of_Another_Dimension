@@ -12,6 +12,8 @@ public class Card : ScriptableObject
     public string cardDescription;
     public cardTypes cardType;
     public int countOfThisCardInDeck = 1;
+    public int ownerID =-1;
+
     public enum cardTypes {
         Hand,
         Range,

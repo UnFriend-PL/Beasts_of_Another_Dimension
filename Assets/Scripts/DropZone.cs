@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -6,16 +8,19 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
 {
     public Draggable.CardZones CardsZone = Draggable.CardZones.Mele;
     public bool canBeDragged = true;
+    public int zoneOwnerId = -1;
 
     public void OnDrop(PointerEventData eventData)
     {
         Draggable d = eventData.pointerDrag.GetComponent<Draggable>();
         if (d != null)
         {
-            if (CardsZone == d.cardZone)
+            var cardOwnerId = d.gameObject.GetComponent<CardDisplay>().card.ownerID;
+            var player = PlayerManager.instance.players.Where(x => x.myTurn == true && x.ID == cardOwnerId);
+            if (CardsZone == d.cardZone && zoneOwnerId == cardOwnerId && player != null)
             {
                  // sprawdzenie czy ilosc many jest odpowiednia oraz czy strefa karty sie zgadza
-                var characterObject = GameObject.Find("Character");
+                var characterObject = GameObject.Find("Character"); // TO DO: dorobic 2 postac(character), ogarnac aby od odpowiedniego sciagalo mane
                 var characterValues = characterObject.GetComponent<CharacterDisplay>();
                 if (Convert.ToInt32(characterValues.currentMana.text) < Convert.ToInt32(eventData.pointerDrag.GetComponent<CardDisplay>().manaText.text))
                 {

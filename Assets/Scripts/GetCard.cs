@@ -10,13 +10,11 @@ public class GetCard : MonoBehaviour
 {
     public List<Card> cardList = new List<Card>();
     public GameObject cardPrefab;
-    public Transform canvas;
 
     // Start is called before the first frame update
     void Start()
     {
         string[] assets = AssetDatabase.FindAssets("t:Card", new string[] { "Assets/Sprites/Cards/DemonsDeck" });
-        canvas = transform;
         foreach (string asset in assets)
         {
             string path = AssetDatabase.GUIDToAssetPath(asset);
@@ -38,20 +36,22 @@ public class GetCard : MonoBehaviour
 
     public void PutCardIntoHand()
     {
-        System.Random rand = new System.Random();
-        int randomCardIndex = rand.Next(0, cardList.Count);
+        CardManager.instance.PutCardIntoHand();
+        // nie usuwac!!!
+        //System.Random rand = new System.Random();
+        //int randomCardIndex = rand.Next(0, cardList.Count);
 
-        GameObject hand = GameObject.Find("Hand");
-        if (cardList.Any())
-        {
-            Debug.Log(cardList.Count);
-            GameObject cardObject = Instantiate(cardPrefab, transform);
-            cardObject.GetComponent<CardDisplay>().card = cardList[randomCardIndex];
-            cardObject.GetComponent<Draggable>().cardZone = (Draggable.CardZones)cardList[randomCardIndex].cardType;
-            cardList.Remove(cardList[randomCardIndex]);
-            cardObject.transform.SetParent(hand.transform, false);
-            Debug.Log(cardList.Count);
+        //GameObject hand = GameObject.Find("Hand");
+        //if (cardList.Any())
+        //{
+        //    Debug.Log(cardList.Count);
+        //    GameObject cardObject = Instantiate(cardPrefab, transform);
+        //    cardObject.GetComponent<CardDisplay>().card = cardList[randomCardIndex];
+        //    cardObject.GetComponent<Draggable>().cardZone = (Draggable.CardZones)cardList[randomCardIndex].cardType;
+        //    cardList.Remove(cardList[randomCardIndex]);
+        //    cardObject.transform.SetParent(hand.transform, false);
+        //    Debug.Log(cardList.Count);
 
-        }
+        //}
     }
 }
