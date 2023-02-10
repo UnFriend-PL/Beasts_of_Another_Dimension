@@ -6,14 +6,12 @@ public class Player
 {
     public int health;
     public int ID;
-    public string nickName;
+    public string name;
     public bool myTurn;
-    public GameObject character;
-    public Player(int health, int ID, string nickName, GameObject character)
+    public Player(int health, int ID, string name)
     {
         this.health = health;
         this.ID = ID;
-        this.nickName = nickName;
-        this.character = character;
+        this.name = name;
     }   
 }

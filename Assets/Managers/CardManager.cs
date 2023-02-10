@@ -23,14 +23,17 @@ public class CardManager : MonoBehaviour
 
     private void Start()
     {
-        string[] assets = AssetDatabase.FindAssets("t:Card", new string[] { "Assets/Sprites/Cards/DemonsDeck" });
+        string[] demonDeck = AssetDatabase.FindAssets("t:Card", new string[] { $"{GameConfig.CardAssetsPath}{GameConfig.DemonsDeck}" });
         //player1Hand = transform;
-        foreach (string asset in assets)
+        int counter = 0;
+        foreach (string asset in demonDeck)
         {
             string path = AssetDatabase.GUIDToAssetPath(asset);
             Card card = AssetDatabase.LoadAssetAtPath<Card>(path);
             for (int i = 0; i <= card.countOfThisCardInDeck; i++)
             {
+                card.cardID = counter;
+                counter++;
                 cardList.Add(card);
             }
         }
@@ -49,19 +52,19 @@ public class CardManager : MonoBehaviour
             var hand2 = player2Hand;
             if (cardList.Any())
             {
-                Debug.Log(cardList.Count);
+                //Debug.Log(cardList.Count);
                 GameObject cardObject = Instantiate(cardPrefab, transform);
                 GameObject cardObject2 = Instantiate(cardPrefab, transform);
                 cardObject.GetComponent<CardDisplay>().card = cardList[randomCardIndex];
                 cardObject2.GetComponent<CardDisplay>().card = cardList[randomCardIndex];
                 cardObject.GetComponent<Draggable>().cardZone = (Draggable.CardZones)cardList[randomCardIndex].cardType;
-                cardObject.GetComponent<CardDisplay>().card.ownerID = player1Hand.GetComponent<DropZone>().zoneOwnerId;
-                cardObject2.GetComponent<CardDisplay>().card.ownerID = player2Hand.GetComponent<DropZone>().zoneOwnerId;
+                cardObject.GetComponent<CardDisplay>().ownerId = player1Hand.GetComponent<DropZone>().zoneOwnerId;
+                cardObject2.GetComponent<CardDisplay>().ownerId = player2Hand.GetComponent<DropZone>().zoneOwnerId;
                 cardObject2.GetComponent<Draggable>().cardZone = (Draggable.CardZones)cardList[randomCardIndex].cardType;
                 cardList.Remove(cardList[randomCardIndex]);
                 cardObject.transform.SetParent(hand.transform, false);
                 cardObject2.transform.SetParent(hand2.transform, false);
-                Debug.Log(cardList.Count);
+                //Debug.Log(cardList.Count);
 
             }
         }

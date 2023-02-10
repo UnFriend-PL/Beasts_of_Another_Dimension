@@ -9,5 +9,4 @@ public class Character : ScriptableObject
     public int maxMana = 12;
     public int currentMana;
     public float lvl = 13f;
-
 }

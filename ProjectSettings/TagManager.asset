@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Card
+  - Range
+  - Mele
+  - Effect
+  - CharacterHolder
+  - Hand
   layers:
   - Default
   - TransparentFX

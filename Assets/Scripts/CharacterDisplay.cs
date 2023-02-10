@@ -7,12 +7,15 @@ using UnityEngine.UI;
 
 public class CharacterDisplay : MonoBehaviour
 {
+    public static CharacterDisplay instance;
     public Character character;
     public TextMeshProUGUI characterName;
     public TextMeshProUGUI characterLvl;
     public TextMeshProUGUI currentMana;
     public TextMeshProUGUI maxMana;
+    public TextMeshProUGUI nickname;
     public Image avatar;
+    public Player player;
 
     void Start()
     {
@@ -21,6 +24,11 @@ public class CharacterDisplay : MonoBehaviour
         currentMana.text = character.currentMana.ToString();
         maxMana.text = character.maxMana.ToString();
         avatar.sprite = character.avatar;
+        nickname.text = player.name;
     }
 
+    private void Awake()
+    {
+        instance = this;
+    }
 }

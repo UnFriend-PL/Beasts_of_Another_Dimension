@@ -7,6 +7,10 @@ public class TurnManager : MonoBehaviour
     public int currentPlayerIdTurn;
     public static TurnManager instance;
 
+    public void Start()
+    {
+    }
+
     private void Awake()
     {
         instance = this;
@@ -14,8 +18,8 @@ public class TurnManager : MonoBehaviour
 
     public void StartTurnGameplay(int playerID)
     {
-        currentPlayerIdTurn= playerID;
-        PlayerManager.instance.AssignTurn(currentPlayerIdTurn);
+        currentPlayerIdTurn = playerID;
+        CharacterManager.instance.AssignTurn(currentPlayerIdTurn);
     }
 
     public void StartTurn()

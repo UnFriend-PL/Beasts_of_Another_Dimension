@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CardDisplay : MonoBehaviour
 {
     // Start is called before the first frame update
+    public static CardDisplay instance;
     public Card card;
     public TextMeshProUGUI cardNameText;
     public TextMeshProUGUI cardDescription;
@@ -14,6 +15,7 @@ public class CardDisplay : MonoBehaviour
     public TextMeshProUGUI hp;
     public TextMeshProUGUI dmg;
     public Image cardType;
+    public int ownerId =-1;
 
     void Start()
     {
@@ -24,5 +26,10 @@ public class CardDisplay : MonoBehaviour
         hp.text = card.hp.ToString();
         dmg.text = card.dmg.ToString();
         cardType.sprite = card.iconCardType;
+    }
+
+    private void Awake()
+    {
+        instance = this;
     }
 }
