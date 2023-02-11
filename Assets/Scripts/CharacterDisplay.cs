@@ -14,6 +14,7 @@ public class CharacterDisplay : MonoBehaviour
     public TextMeshProUGUI currentMana;
     public TextMeshProUGUI maxMana;
     public TextMeshProUGUI nickname;
+    public TextMeshProUGUI currentHp;
     public Image avatar;
     public Player player;
 
@@ -23,6 +24,7 @@ public class CharacterDisplay : MonoBehaviour
         characterLvl.text = $"{character.lvl} LvL";
         currentMana.text = character.currentMana.ToString();
         maxMana.text = character.maxMana.ToString();
+        currentHp.text = player.health.ToString();
         avatar.sprite = character.avatar;
         nickname.text = player.name;
     }

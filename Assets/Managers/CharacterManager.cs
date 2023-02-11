@@ -23,6 +23,17 @@ public class CharacterManager : MonoBehaviour
         //player.myTurn = true;
     }
 
+    public Player GetPlayerName(int playerID)
+    {
+        foreach(var player in players) {
+            if(player.ID == playerID)
+            {
+                return player;
+            }
+        }
+        throw new Exception("Player not Found.");
+    }
+
     private void Awake()
     {
         instance = this;
@@ -31,7 +42,7 @@ public class CharacterManager : MonoBehaviour
         Player p0, p1;
         int id1=1, id2=2;
         p0 = new Player(10, id1, "szymon");
-        p0.myTurn = true;
+        //p0.myTurn = true;
         GameConfig.Player1ID = id1;
         GameConfig.Player2ID = id2;
         p1 = new Player(10, id2, "Michal");
@@ -54,7 +65,7 @@ public class CharacterManager : MonoBehaviour
             }
 
         }
-
+        //p0.health = -1;
         //foreach (var character in characters)
         //{
         //    players.Add(character.player);

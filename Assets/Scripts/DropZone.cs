@@ -17,17 +17,10 @@ public class DropZone : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPoin
         {
             var cardOwnerId = d.gameObject.GetComponent<CardDisplay>().ownerId;
             CharacterDisplay character = GameObject.FindObjectsOfType<CharacterDisplay>().Where(x => x.player.ID == cardOwnerId).First();
-             //CharacterDisplay characterDisplayInstance = CharacterManager.instance.characters.Where(x => x.player.ID == cardOwnerId).First(); /// <- nad tym myslec xd
             Debug.Log(character.name);
             var player = character.player;
             if (CardsZone == d.cardZone && zoneOwnerId == cardOwnerId && player.myTurn)
             {
-                // sprawdzenie czy ilosc many jest odpowiednia oraz czy strefa karty sie zgadza
-                //var characterList = TurnManager.instance.
-
-                //var characterObject = CharacterManager.instance.characters.Where(x => x.player.ID = ); // TO DO: dorobic 2 postac(character), ogarnac aby od odpowiedniego sciagalo mane
-                //var characterObject = GameObject.Find("Character"); // TO DO: dorobic 2 postac(character), ogarnac aby od odpowiedniego sciagalo mane
-                //var characterValues = characterObject.GetComponent<CharacterDisplay>();
                 if (Convert.ToInt32(character.currentMana.text) < Convert.ToInt32(eventData.pointerDrag.GetComponent<CardDisplay>().manaText.text))
                 {
                     Debug.Log($"{eventData.pointerDrag.name} can not be dragged because mana is too small");

@@ -37,21 +37,5 @@ public class GetCard : MonoBehaviour
     public void PutCardIntoHand()
     {
         CardManager.instance.PutCardIntoHand();
-        // nie usuwac!!!
-        //System.Random rand = new System.Random();
-        //int randomCardIndex = rand.Next(0, cardList.Count);
-
-        //GameObject hand = GameObject.Find("Hand");
-        //if (cardList.Any())
-        //{
-        //    Debug.Log(cardList.Count);
-        //    GameObject cardObject = Instantiate(cardPrefab, transform);
-        //    cardObject.GetComponent<CardDisplay>().card = cardList[randomCardIndex];
-        //    cardObject.GetComponent<Draggable>().cardZone = (Draggable.CardZones)cardList[randomCardIndex].cardType;
-        //    cardList.Remove(cardList[randomCardIndex]);
-        //    cardObject.transform.SetParent(hand.transform, false);
-        //    Debug.Log(cardList.Count);
-
-        //}
     }
 }
