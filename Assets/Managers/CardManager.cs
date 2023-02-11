@@ -9,7 +9,7 @@ using UnityEngine;
 public class CardManager : MonoBehaviour
 {
     public static CardManager instance;
-    public List<Card> cards = new List<Card>();
+    //public List<Card> cards = new List<Card>();
     public Transform player1Hand, player2Hand;
 
     public List<Card> cardList = new List<Card>();
@@ -23,10 +23,21 @@ public class CardManager : MonoBehaviour
 
     private void Start()
     {
-        string[] demonDeck = AssetDatabase.FindAssets("t:Card", new string[] { $"{GameConfig.CardAssetsPath}{GameConfig.DemonsDeck}" });
+        SetDeck(GameConfig.Player1ID, GameConfig.DemonsDeck);
+        SetDeck(GameConfig.Player2ID, GameConfig.DemonsDeck);
+
+        GenerateStartCards(GameConfig.Player1ID);
+        GenerateStartCards(GameConfig.Player2ID);
+    }
+
+    public void SetDeck(int playerId, string deckName)
+    {
+        string[] cardDeck = AssetDatabase.FindAssets("t:Card", new string[] { $"{GameConfig.CardAssetsPath}{deckName}" });
         //player1Hand = transform;
         int counter = 0;
-        foreach (string asset in demonDeck)
+        List<Card> p1Deck = new List<Card>();
+        List<Card> p2Deck = new List<Card>();
+        foreach (string asset in cardDeck)
         {
             string path = AssetDatabase.GUIDToAssetPath(asset);
             Card card = AssetDatabase.LoadAssetAtPath<Card>(path);
@@ -34,58 +45,92 @@ public class CardManager : MonoBehaviour
             {
                 card.cardID = counter;
                 counter++;
-                cardList.Add(card);
+                if (GameConfig.Player1ID == playerId)
+                {
+                    p1Deck.Add(card);
+                }
+                else
+                {
+                    p2Deck.Add(card);
+
+                }
             }
         }
-
-        GenerateStartCards();
+        if (GameConfig.Player1ID == playerId)
+        {
+            GameConfig.Player1Deck = p1Deck;
+        }
+        else
+        {
+            GameConfig.Player2Deck = p2Deck;
+        }
     }
 
-    private void GenerateStartCards()
+
+    private void GenerateStartCards(int playerId)
     {
+        List<Card> cardDeck;
+        DropZone hand;
+        if (GameConfig.Player1ID == playerId)
+        {
+            cardDeck = GameConfig.Player1Deck;
+            hand = player1Hand.GetComponent<DropZone>();
+        }
+        else if (GameConfig.Player2ID == playerId)
+        {
+            cardDeck = GameConfig.Player2Deck;
+            hand = player2Hand.GetComponent<DropZone>();
+        }
+        else
+        {
+            throw new Exception("No found pllayer");
+        }
         for (int i = 0; i < 5; i++)
         {
             System.Random rand = new System.Random();
-            int randomCardIndex = rand.Next(0, cardList.Count);
-            //GameObject hand = GameObject.Find("Hand");
-            var hand = player1Hand;
-            var hand2 = player2Hand;
-            if (cardList.Any())
+            int randomCardIndex = rand.Next(0, cardDeck.Count);
+            if (cardDeck.Any())
             {
-                //Debug.Log(cardList.Count);
                 GameObject cardObject = Instantiate(cardPrefab, transform);
-                GameObject cardObject2 = Instantiate(cardPrefab, transform);
-                cardObject.GetComponent<CardDisplay>().card = cardList[randomCardIndex];
-                cardObject2.GetComponent<CardDisplay>().card = cardList[randomCardIndex];
-                cardObject.GetComponent<Draggable>().cardZone = (Draggable.CardZones)cardList[randomCardIndex].cardType;
-                cardObject.GetComponent<CardDisplay>().ownerId = player1Hand.GetComponent<DropZone>().zoneOwnerId;
-                cardObject2.GetComponent<CardDisplay>().ownerId = player2Hand.GetComponent<DropZone>().zoneOwnerId;
-                cardObject2.GetComponent<Draggable>().cardZone = (Draggable.CardZones)cardList[randomCardIndex].cardType;
-                cardList.Remove(cardList[randomCardIndex]);
+                cardObject.GetComponent<CardDisplay>().card = cardDeck[randomCardIndex];
+                cardObject.GetComponent<Draggable>().cardZone = (Draggable.CardZones)cardDeck[randomCardIndex].cardType;
+                cardObject.GetComponent<CardDisplay>().ownerId = playerId;
+                cardDeck.Remove(cardDeck[randomCardIndex]);
                 cardObject.transform.SetParent(hand.transform, false);
-                cardObject2.transform.SetParent(hand2.transform, false);
-                //Debug.Log(cardList.Count);
-
             }
         }
     }
 
 
-    public void PutCardIntoHand()
+    public void PutCardIntoHand(int playerId)
     {
-        System.Random rand = new System.Random();
-        int randomCardIndex = rand.Next(0, cardList.Count);
-        var hand = player1Hand;
-        //GameObject hand = GameObject.Find("Hand");
-        if (cardList.Any())
+        List<Card> cardDeck;
+        DropZone hand;
+        if (GameConfig.Player1ID == playerId)
         {
-            Debug.Log(cardList.Count);
+            cardDeck = GameConfig.Player1Deck;
+            hand = player1Hand.GetComponent<DropZone>();
+        }
+        else if (GameConfig.Player2ID == playerId)
+        {
+            cardDeck = GameConfig.Player2Deck;
+            hand = player2Hand.GetComponent<DropZone>();
+        }
+        else
+        {
+            throw new Exception("No found pllayer");
+        }
+        System.Random rand = new System.Random();
+        int randomCardIndex = rand.Next(0, cardDeck.Count);
+        if (cardDeck.Any())
+        {
+            Debug.Log(cardDeck.Count);
             GameObject cardObject = Instantiate(cardPrefab, transform);
-            cardObject.GetComponent<CardDisplay>().card = cardList[randomCardIndex];
-            cardObject.GetComponent<Draggable>().cardZone = (Draggable.CardZones)cardList[randomCardIndex].cardType;
-            cardList.Remove(cardList[randomCardIndex]);
+            cardObject.GetComponent<CardDisplay>().card = cardDeck[randomCardIndex];
+            cardObject.GetComponent<Draggable>().cardZone = (Draggable.CardZones)cardDeck[randomCardIndex].cardType;
+            cardDeck.Remove(cardDeck[randomCardIndex]);
             cardObject.transform.SetParent(hand.transform, false);
-            Debug.Log(cardList.Count);
+            Debug.Log(cardDeck.Count);
 
         }
     }

@@ -15,5 +15,5 @@ MonoBehaviour:
   avatar: {fileID: 21300000, guid: c3de9fa13bd827e4ea8627b06cc49d3f, type: 3}
   nickName: Demon Master
   maxMana: 2
-  currentMana: 2
+  currentMana: 10
   lvl: 13

@@ -14,15 +14,15 @@ public class GetCard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        string[] assets = AssetDatabase.FindAssets("t:Card", new string[] { "Assets/Sprites/Cards/DemonsDeck" });
-        foreach (string asset in assets)
-        {
-            string path = AssetDatabase.GUIDToAssetPath(asset);
-            Card card = AssetDatabase.LoadAssetAtPath<Card>(path);
-            for(int i = 0; i <= card.countOfThisCardInDeck; i++) {
-                cardList.Add(card);
-            }
-        }
+        //string[] assets = AssetDatabase.FindAssets("t:Card", new string[] { "Assets/Sprites/Cards/DemonsDeck" });
+        //foreach (string asset in assets)
+        //{
+        //    string path = AssetDatabase.GUIDToAssetPath(asset);
+        //    Card card = AssetDatabase.LoadAssetAtPath<Card>(path);
+        //    for(int i = 0; i <= card.countOfThisCardInDeck; i++) {
+        //        cardList.Add(card);
+        //    }
+        //}
 
         //foreach (Card card in cardList)
         //{
@@ -36,6 +36,6 @@ public class GetCard : MonoBehaviour
 
     public void PutCardIntoHand()
     {
-        CardManager.instance.PutCardIntoHand();
+        CardManager.instance.PutCardIntoHand(TurnManager.instance.currentPlayerIdTurn);
     }
 }
