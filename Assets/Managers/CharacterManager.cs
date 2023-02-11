@@ -18,6 +18,7 @@ public class CharacterManager : MonoBehaviour
         foreach(Player player in players)
         {
             player.myTurn = player.ID == currentPlayerIdTurn;
+            // dodac system many tutaj
         }
         //Player player = players.Find(x => x.ID== currentPlayerIdTurn);
         //player.myTurn = true;
