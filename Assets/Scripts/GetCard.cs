@@ -8,8 +8,8 @@ using UnityEngine;
 
 public class GetCard : MonoBehaviour
 {
-    public List<Card> cardList = new List<Card>();
-    public GameObject cardPrefab;
+    //public List<Card> cardList = new List<Card>();
+    //public GameObject cardPrefab;
 
     // Start is called before the first frame update
     void Start()

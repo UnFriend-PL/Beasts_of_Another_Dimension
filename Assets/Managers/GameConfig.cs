@@ -11,6 +11,6 @@ public static class GameConfig
     private static string cardAssetsPath = "Assets/Sprites/Cards/";
     private static string demonsDeckFolderName = "DemonsDeck";
     public static string CardAssetsPath { get { return cardAssetsPath; } }
-    public static string DemonsDeck { get { return demonsDeckFolderName; } }
+    public static string DemonsDeckFolderName { get { return demonsDeckFolderName; } }
 
 }

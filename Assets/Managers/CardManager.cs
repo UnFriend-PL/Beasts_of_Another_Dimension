@@ -23,8 +23,8 @@ public class CardManager : MonoBehaviour
 
     private void Start()
     {
-        SetDeck(GameConfig.Player1ID, GameConfig.DemonsDeck);
-        SetDeck(GameConfig.Player2ID, GameConfig.DemonsDeck);
+        SetDeck(GameConfig.Player1ID, GameConfig.DemonsDeckFolderName);
+        SetDeck(GameConfig.Player2ID, GameConfig.DemonsDeckFolderName);
 
         GenerateStartCards(GameConfig.Player1ID);
         GenerateStartCards(GameConfig.Player2ID);
