@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
     public TMP_InputField inputField;
     private string selectedDeck;
     public static MainMenu instance;
+    string selectedDeckName;
     private void Start()
     {
         instance = this;
@@ -20,6 +21,7 @@ public class MainMenu : MonoBehaviour
     public void PlayGame()
     {
         if (CheckDefaultValuesToStartGame()) {
+            AddPlayerToGame();
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
@@ -31,7 +33,7 @@ public class MainMenu : MonoBehaviour
         if(inputField == null || inputField.text == "") { 
             isCorrect = false;
         }
-        var selectedDeckName = GameObject.Find("SelectedDeckName").GetComponent<TextMeshProUGUI>().text;
+        selectedDeckName = GameObject.Find("SelectedDeckName").GetComponent<TextMeshProUGUI>().text;
         if(selectedDeckName == "" || selectedDeckName == null || selectedDeckName == "Selected Deck")
         {
             isCorrect= false;
@@ -40,7 +42,16 @@ public class MainMenu : MonoBehaviour
         return isCorrect;
     }
 
-    public void SetSelectedDeck(string deckName)
+    public void AddPlayerToGame()
+    {
+        //int playerID = 1;
+        //var player = new Player(20, playerID, inputField.text);
+        //CharacterManager.instance.AddPlayer(player); // nie dziala :/ blad referencji :(
+        //CardManager.instance.SetDeck(playerID, selectedDeckName);
+
+    }
+
+    public void SetSelectedDeckInUI(string deckName)
     {
         Debug.Log(deckName);
         selectedDeck= deckName;

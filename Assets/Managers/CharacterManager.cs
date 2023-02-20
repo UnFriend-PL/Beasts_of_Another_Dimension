@@ -15,7 +15,7 @@ public class CharacterManager : MonoBehaviour
 
     internal void AssignTurn(int currentPlayerIdTurn)
     {
-        foreach(Player player in players)
+        foreach (Player player in players)
         {
             player.myTurn = player.ID == currentPlayerIdTurn;
             // dodac system many tutaj
@@ -26,24 +26,32 @@ public class CharacterManager : MonoBehaviour
 
     public Player GetPlayerName(int playerID)
     {
-        foreach(var player in players) {
-            if(player.ID == playerID)
+        foreach (var player in players)
+        {
+            if (player.ID == playerID)
             {
                 return player;
             }
         }
         throw new Exception("Player not Found.");
     }
-
+    public void AddPlayer(Player player)
+    {
+        players.Add(player);
+    }
+    public int GetPlayersCount()
+    {
+        return players.Count;
+    }
     private void Awake()
     {
         instance = this;
 
 
         Player p0, p1;
-        int id1=1, id2=2;
+        int id1 = 1, id2 = 2;
         p0 = new Player(10, id1, "szymon");
-        //p0.myTurn = true;
+        p0.myTurn = true;
         GameConfig.Player1ID = id1;
         GameConfig.Player2ID = id2;
         p1 = new Player(10, id2, "Michal");
@@ -51,21 +59,7 @@ public class CharacterManager : MonoBehaviour
         players.Add(p1);
         var canvas = GameObject.FindGameObjectsWithTag("CharacterHolder");
         Debug.Log(canvas);
-        if (players.Any())
-        {
-            for (int i=0;i< characters.Count; i++)
-            {
-                Debug.Log(characters.Count);
-                GameObject characterObject = Instantiate(characterPrefab, transform);
-                characterObject.GetComponent<CharacterDisplay>().player = players[i];
-                //cardObject.GetComponent<CardDisplay>().card = cardList[randomCardIndex];
-                //cardObject.GetComponent<Draggable>().cardZone = (Draggable.CardZones)cardList[randomCardIndex].cardType;
-                //cardList.Remove(cardList[randomCardIndex]);
-                characterObject.transform.SetParent(canvas[i].transform, false);
-                Debug.Log(characters.Count);
-            }
 
-        }
         //p0.health = -1;
         //foreach (var character in characters)
         //{
